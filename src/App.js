@@ -1,20 +1,35 @@
-import React from 'react';
-import City from './Container/City'
-import Cityfun from './Container/Cityfun';
-import Country from './Container/Country';
-import CountryFun from './Container/CountryFun';
-import Time from './Container/Time';
-import TimeFun from './Container/TimeFun';
+import React, { useEffect, useState } from 'react';
+import Loading from './Container/Loading';
+import Home from './Container/Home'
+import Counter from './Container/Counter';
+
+const LoadingWithHome = Loading(Home);
 
 function App(props) {
+
+const[loading , setLoading]=useState(false);
+const[data , setData]=useState([]);
+
+ const orgData=[
+   { id:101 , name:"monika" },
+   {id:102 , name:"shreya"}
+];
+
+useEffect(()=>{
+  setLoading(true);
+  setTimeout(()=>{setLoading(false);setData(orgData)} ,2000)
+},[])
+
+
+
   return (
     <div>
-      {/* <City /> */}
-      {/* <Cityfun /> */}
-      {/* <Country /> */}
-      {/* <CountryFun /> */}
-      {/* <Time /> */}
-      <TimeFun />
+          <LoadingWithHome
+           isloading ={loading}
+          data = {data}
+          />
+          
+          
     </div>
   );
 }
